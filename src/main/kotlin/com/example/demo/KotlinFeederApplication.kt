@@ -9,9 +9,12 @@ import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 import org.springframework.boot.web.client.RestTemplateBuilder
 
-
-
-
+/*
+ * In Spring, the objects that form the backbone of applications are managed
+ * with beans. A "bean" is an object that is instantiated, assembled, and otherwise
+ * managed by an IoC container.  Beans, and the dependencies among them, are
+ * reflected in the configuration metadata used by a container.
+ */
 
 @SpringBootApplication
 class KotlinFeederApplication {
