@@ -4,6 +4,7 @@ import com.samskivert.mustache.Mustache
 import org.springframework.boot.Banner
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
@@ -31,18 +32,18 @@ class KotlinFeederApplication {
 
     @Bean
     fun databaseInitializer(userRepository: UserRepository,
-                            articleRepository: ArticleRepository) = CommandLineRunner {
+                            cardRepository: CardRepository) = CommandLineRunner {
         val smaldini = User("smaldini", "Stéphane", "Maldini")
         userRepository.save(smaldini)
 
-        articleRepository.save(Article(
+        cardRepository.save(Card(
                 "Reactor Bismuth is out",
                 "Lorem ipsum",
                 "dolor **sit** amet https://projectreactor.io/",
                 smaldini,
                 1
         ))
-        articleRepository.save(Article(
+        cardRepository.save(Card(
                 "Reactor Aluminium has landed",
                 "Lorem ipsum",
                 "dolor **sit** amet https://projectreactor.io/",
@@ -50,6 +51,8 @@ class KotlinFeederApplication {
                 2
         ))
     }
+
+
 }
 
 fun main(args: Array<String>) {

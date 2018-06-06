@@ -10,7 +10,7 @@ import javax.persistence.*
  */
 
 @Entity
-data class Article(
+data class Card(
         val title: String,
         val headline: String,
         val content: String,

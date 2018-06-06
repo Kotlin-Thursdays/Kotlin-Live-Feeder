@@ -3,21 +3,22 @@
 <h1> {{title}} </h1>
 
 <div class="feeder">
-    {{#articles}}
+    {{#cards}}
         <section>
-            <header class="article-header">
-                <h2 class="article-title">
-                    <a href="/article/{{id}}">{{title}}</a>
+            <header class="card-header">
+                <h2 class="card-title">
+                    <a href="/card/{{id}}">{{title}}</a>
                 </h2>
-                <div class="article-meta">
+                <div class="card-meta">
                     By <strong>{{author.firstname}}</strong>, <strong>{{addedAt}}</strong>
                 </div>
             </header>
-            <div class="article-description">
+            <div class="card-description">
                 {{headline}}
             </div>
         </section>
-    {{/articles}}
+    {{/cards}}
+
 </div>
 
 {{> footer }}

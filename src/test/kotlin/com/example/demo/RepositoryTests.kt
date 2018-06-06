@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @DataJpaTest
 class RespositoryTests(@Autowired val entityManager: TestEntityManager,
                        @Autowired val userRepository: UserRepository,
-                       @Autowired val articleRepository: ArticleRepository) {
+                       @Autowired val cardRepository: CardRepository) {
 
     /* TestEntityManager methods:
      * - persist(E entity): Make an instance managed and persistent
@@ -20,16 +20,16 @@ class RespositoryTests(@Autowired val entityManager: TestEntityManager,
      */
 
     @Test
-    fun `When findById then return Article`() {
+    fun `When findById then return Card`() {
         val juergen = User("springjuergen", "Juergen", "Hoeller")
         entityManager.persist(juergen)
-        val article = Article("Spring Frameowkr 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen)
-        entityManager.persist(article)
+        val card = Card("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen)
+        entityManager.persist(card)
         entityManager.flush()
 
-        val found = articleRepository.findById(article.id!!)
+        val found = cardRepository.findById(card.id!!)
 
-        assertThat(found.get()).isEqualTo(article)
+        assertThat(found.get()).isEqualTo(card)
     }
 
 }

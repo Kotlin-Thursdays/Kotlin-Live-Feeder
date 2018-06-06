@@ -1,6 +1,11 @@
 package com.example.demo
 
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.web.bind.annotation.*
+import java.security.Principal
 
 /* ------------------------ Spring Web Flux ---------------------------
  * @RestController is a composed annotation through AOP, composed of a
@@ -15,8 +20,8 @@ import org.springframework.web.bind.annotation.*
  */
 
 @RestController
-@RequestMapping("/api/article")
-class ArticleController(private val repository: ArticleRepository,
+@RequestMapping("/api/card")
+class CardController(private val repository: CardRepository,
                         private val markdownConverter: MarkdownConverter) {
 
     @GetMapping("/")

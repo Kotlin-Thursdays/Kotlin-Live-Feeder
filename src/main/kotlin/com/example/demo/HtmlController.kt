@@ -8,29 +8,29 @@ import org.springframework.web.bind.annotation.PathVariable
 import java.lang.IllegalArgumentException
 
 @Controller
-class HtmlController(private val repository: ArticleRepository,
+class HtmlController(private val repository: CardRepository,
                      private val markdownConverter: MarkdownConverter) {
 
     @GetMapping("/")
     fun app(model: Model): String {
         // instead of model.addAttribute("title", "Application")
-        model["title"] = "Application"
-        model["articles"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
+        model["title"] = "Kotlin Stream"
+        model["cards"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "app"
     }
 
-    @GetMapping("/article/{id}")
-    fun article(@PathVariable id: Long, model: Model): String {
-        val article = repository
+    @GetMapping("/card/{id}")
+    fun card(@PathVariable id: Long, model: Model): String {
+        val card = repository
                 .findById(id)
-                .orElseThrow { IllegalArgumentException("Wrong article id provided") }
+                .orElseThrow { IllegalArgumentException("Wrong card id provided") }
                 .render()
-        model["title"] = article.title
-        model["article"] = article
-        return "article"
+        model["title"] = card.title
+        model["card"] = card
+        return "card"
     }
 
-    fun Article.render() = RenderedArticle(
+    fun Card.render() = RenderedCard(
             title,
             markdownConverter.invoke(headline),
             markdownConverter.invoke(content),
@@ -39,7 +39,7 @@ class HtmlController(private val repository: ArticleRepository,
             addedAt.format()
     )
 
-    data class RenderedArticle(
+    data class RenderedCard(
             val title: String,
             val headline: String,
             val content: String,

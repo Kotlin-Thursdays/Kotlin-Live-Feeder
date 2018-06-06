@@ -27,25 +27,25 @@ class HttpApiTests(@Autowired val mockMvc: MockMvc) {
     private lateinit var userRepository: UserRepository
 
     @MockBean
-    private lateinit var articleRepository: ArticleRepository
+    private lateinit var cardRepository: CardRepository
 
     @MockBean
     private lateinit var markdownConverter: MarkdownConverter
 
     @Test
-    fun `List articles`() {
+    fun `List cards`() {
         val juergen = User("springjuergen", "Juergen", "Hoeller")
-        val spring5Article = Article("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen, 1)
-        val spring43Article = Article("Spring Framework 4.3 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen, 2)
-        whenever(articleRepository.findAllByOrderByAddedAtDesc()).thenReturn(listOf(spring5Article, spring43Article))
+        val spring5Card = Card("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen, 1)
+        val spring43Card = Card("Spring Framework 4.3 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen, 2)
+        whenever(cardRepository.findAllByOrderByAddedAtDesc()).thenReturn(listOf(spring5Card, spring43Card))
         whenever(markdownConverter.invoke(any())).thenAnswer { it.arguments[0] }
-        mockMvc.perform(get("/api/article/").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/card/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("\$.[0].author.login").value(juergen.login))
-                .andExpect(jsonPath("\$.[0].id").value(spring5Article.id!!))
+                .andExpect(jsonPath("\$.[0].id").value(spring5Card.id!!))
                 .andExpect(jsonPath("\$.[1].author.login").value(juergen.login))
-                .andExpect(jsonPath("\$.[1].id").value(spring43Article.id!!))
+                .andExpect(jsonPath("\$.[1].id").value(spring43Card.id!!))
     }
 
     @Test

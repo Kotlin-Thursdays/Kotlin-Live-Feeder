@@ -32,8 +32,8 @@ import org.springframework.data.repository.CrudRepository
  *
  */
 
-interface ArticleRepository : CrudRepository<Article, Long> {
-    fun findAllByOrderByAddedAtDesc(): Iterable<Article>
+interface CardRepository : CrudRepository<Card, Long> {
+    fun findAllByOrderByAddedAtDesc(): Iterable<Card>
 }
 
 interface UserRepository : CrudRepository<User, String>
