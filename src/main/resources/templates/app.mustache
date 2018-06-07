@@ -1,24 +1,32 @@
 {{> header}}
-
-<h1> {{title}} </h1>
-
-<div class="feeder">
-    {{#cards}}
-        <section>
-            <header class="card-header">
-                <h2 class="card-title">
-                    <a href="/card/{{id}}">{{title}}</a>
-                </h2>
-                <div class="card-meta">
-                    By <strong>{{author.firstname}}</strong>, <strong>{{addedAt}}</strong>
-                </div>
-            </header>
-            <div class="card-description">
-                {{headline}}
-            </div>
-        </section>
-    {{/cards}}
-
+<div class="title-header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Kotlin-logo.svg/2000px-Kotlin-logo.svg.png" class="kotlin-logo"/>
+    <h1 class="app-title"> {{title}} </h1>
 </div>
 
+<div class="container">
+    <div class="feeder">
+        {{#cards}}
+            <div class="card">
+                <section>
+                    <header class="card-header">
+                        <h2 class="card-title">
+                            <a href="/card/{{id}}">{{title}}</a>
+                        </h2>
+                        <div class="card-meta">
+                            By <strong>{{author.firstname}}</strong>, <strong>{{addedAt}}</strong>
+                        </div>
+                    </header>
+                    <div class="card-description">
+                        {{headline}}
+                    </div>
+                </section>
+            </div>
+        {{/cards}}
+
+    </div>
+    <div>
+        <button onClick="logout()" class="btn btn-primary">Logout</button>
+    </div>
+</div>
 {{> footer }}

@@ -4,11 +4,12 @@ import com.samskivert.mustache.Mustache
 import org.springframework.boot.Banner
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 import org.springframework.boot.web.client.RestTemplateBuilder
+
 
 /*
  * In Spring, the objects that form the backbone of applications are managed
@@ -17,10 +18,15 @@ import org.springframework.boot.web.client.RestTemplateBuilder
  * reflected in the configuration metadata used by a container.
  */
 
-@SpringBootApplication
-class KotlinFeederApplication {
+/*
+ * WebSecurityConfigurer uses the annotation to configure the
+ * security filter chain that carries the OAuth2 authentication
+ * processor
+ */
 
-    // nullable TemplateLoader? is an optional bean
+@SpringBootApplication
+@EnableConfigurationProperties(KotlinFeederProperties::class)
+class KotlinFeederApplication {
     @Bean
     fun mustacheCompilier(loader: Mustache.TemplateLoader?) =
             Mustache.compiler().escapeHTML(false).withLoader(loader)
@@ -51,7 +57,6 @@ class KotlinFeederApplication {
                 2
         ))
     }
-
 
 }
 

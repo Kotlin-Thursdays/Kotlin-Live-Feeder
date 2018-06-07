@@ -28,7 +28,7 @@ class IntegrationTests(@Autowired val restTemplate : TestRestTemplate) {
     fun `Assert application page title, content and status code`() {
         val entity = restTemplate.getForEntity<String>("/")
         assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-        assertThat(entity.body).contains("<h1> Application </h1>", "Reactor")
+        assertThat(entity.body).contains("<h1> Kotlin Stream </h1>", "Reactor")
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.example.demo
 
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
 import java.util.*
@@ -24,3 +25,14 @@ private fun getOrdinal(n: Int) = when {
     n % 10 == 3 -> "${n}rd"
     else -> "${n}th"
 }
+
+/*fun range(): String  {
+    val time: ZonedDateTime = ZonedDateTime.now()
+    val hour: Int = time.hour
+
+    return when {
+        (hour < 12) -> "Good morning, "
+        (hour > 6) -> "Good evening, "
+        else -> "Good afternoon, "
+    }
+}*/
