@@ -6,12 +6,13 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@ExtendWith(SpringExtension::class)
+/*@ExtendWith(SpringExtension::class)
 @DataJpaTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RespositoryTests(@Autowired val entityManager: TestEntityManager,
-                       @Autowired val userRepository: UserRepository,
                        @Autowired val cardRepository: CardRepository) {
 
     /* TestEntityManager methods:
@@ -21,9 +22,9 @@ class RespositoryTests(@Autowired val entityManager: TestEntityManager,
 
     @Test
     fun `When findById then return Card`() {
-        val juergen = User("springjuergen", "Juergen", "Hoeller")
-        entityManager.persist(juergen)
-        val card = Card("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen)
+        val smaldini = User("smaldini", "Stéphane", "Maldini")
+        entityManager.persist(smaldini)
+        val card = Card("Reactor Bismuth is out", "Lorem ipsum", "dolor **sit** amet https://projectreactor.io/", smaldini)
         entityManager.persist(card)
         entityManager.flush()
 
@@ -32,4 +33,4 @@ class RespositoryTests(@Autowired val entityManager: TestEntityManager,
         assertThat(found.get()).isEqualTo(card)
     }
 
-}
+}*/

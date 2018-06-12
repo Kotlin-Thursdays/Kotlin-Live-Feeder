@@ -45,7 +45,12 @@ jar {
 	baseName = "kotlin-stream"
 	group    = "com.example"
 	version  = "0.0.1-SNAPSHOT"
-	manifest { attributes "Main-Class": "com.example.demo.KotlinFeederApplication"}
+	manifest {
+		attributes "Main-Class": "com.example.demo.KotlinFeederApplicationKt"
+	}
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
 }
 
 repositories {
