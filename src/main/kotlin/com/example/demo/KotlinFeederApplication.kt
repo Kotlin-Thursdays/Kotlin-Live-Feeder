@@ -3,7 +3,6 @@ package com.example.demo
 import com.samskivert.mustache.Mustache
 import org.springframework.boot.Banner
 import org.springframework.boot.CommandLineRunner
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
@@ -61,8 +60,10 @@ class KotlinFeederApplication {
         ))
     }
 
-    fun main(args: Array<String>) {
-        SpringApplication.run(KotlinFeederApplication::class.java, *args)
-    }
+}
 
+fun main(args: Array<String>) {
+    runApplication<KotlinFeederApplication>(*args) {
+        setBannerMode(Banner.Mode.OFF)
+    }
 }
