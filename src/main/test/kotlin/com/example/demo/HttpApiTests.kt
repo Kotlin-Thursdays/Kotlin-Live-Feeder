@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
  * TODO: 4) Part 2: websockets, API grabbing
  */
 
-/*
 @ExtendWith(SpringExtension::class)
 class HttpApiTests(@Autowired val mockMvc: MockMvc) {
 
@@ -60,4 +59,4 @@ class HttpApiTests(@Autowired val mockMvc: MockMvc) {
                 .andExpect(jsonPath("\$.[1].login").value(smaldini.login))
     }
 
-}*/
+}
