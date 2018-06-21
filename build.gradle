@@ -60,7 +60,11 @@ repositories {
 }
 
 dependencies {
-	compile 'org.springframework.social:spring-social-github:1.0.0.M4'
+	compile group: 'org.webjars', name: 'webjars-locator-core', version: '0.35'
+	compile group: 'org.webjars', name: 'jquery', version: '2.1.4'
+	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '1.0.0.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.3.RELEASE'
+	compile('org.springframework.social:spring-social-github:1.0.0.M4')
 	compile('com.atlassian.commonmark:commonmark:0.11.0')
 	compile('com.atlassian.commonmark:commonmark-ext-autolink:0.11.0')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
