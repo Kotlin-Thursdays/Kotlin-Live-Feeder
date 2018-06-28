@@ -25,7 +25,7 @@ class CardController(private val repository: CardRepository,
         repository.findAllByOrderByAddedAtDesc()
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     fun findOne(@PathVariable id: Long, @RequestParam converter: String?) {
         when (converter) {
             "markdown" -> repository.findById(id).map {
@@ -37,6 +37,6 @@ class CardController(private val repository: CardRepository,
             null -> repository.findById(id)
             else -> throw IllegalArgumentException("Only markdown converter is supported.")
         }
-    }
+    }*/
 
 }
