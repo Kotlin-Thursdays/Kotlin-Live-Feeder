@@ -1,15 +1,31 @@
 package com.example.demo
 
 import com.samskivert.mustache.Mustache
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.Banner
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 import org.springframework.boot.web.client.RestTemplateBuilder
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.oauth2.client.OAuth2ClientContext
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 import org.springframework.stereotype.Controller
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices
+import org.springframework.security.oauth2.client.OAuth2RestTemplate
+import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter
+import javax.servlet.Filter
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails
+import org.springframework.web.filter.CompositeFilter
 
 
 /*
@@ -27,8 +43,9 @@ import org.springframework.stereotype.Controller
 
 @Controller
 @SpringBootApplication
-@EnableConfigurationProperties(KotlinFeederProperties::class)
-class KotlinFeederApplication {
+@EnableOAuth2Sso
+class KotlinFeederApplication: WebSecurityConfigurerAdapter() {
+
     @Bean
     fun mustacheCompilier(loader: Mustache.TemplateLoader?) =
             Mustache.compiler().escapeHTML(false).withLoader(loader)
@@ -59,7 +76,6 @@ class KotlinFeederApplication {
                 2
         ))
     }
-
 }
 
 fun main(args: Array<String>) {

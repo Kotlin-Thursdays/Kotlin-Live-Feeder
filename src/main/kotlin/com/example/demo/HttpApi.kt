@@ -40,18 +40,3 @@ class CardController(private val repository: CardRepository,
     }
 
 }
-
-@RestController
-@RequestMapping("/api/user")
-class UserController(private val repository: UserRepository) {
-
-    @GetMapping("/")
-    fun findAll() {
-        repository.findAll()
-    }
-
-    @GetMapping("/{login}")
-    fun findOne(@PathVariable login: String) {
-        repository.findById(login)
-    }
-}

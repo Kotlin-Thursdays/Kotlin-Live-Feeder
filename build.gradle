@@ -1,11 +1,14 @@
 buildscript {
 	ext {
-		kotlinVersion = '1.2.41'
+		kotlinVersion = '1.2.50'
 		springBootVersion = '2.0.2.RELEASE'
 		gradleDockerVersion = "1.2"
 	}
 	repositories {
 		mavenCentral()
+		maven {
+			url 'https://repo.spring.io/libs-milestone'
+		}
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -60,20 +63,28 @@ repositories {
 }
 
 dependencies {
-	compile group: 'org.webjars', name: 'webjars-locator-core', version: '0.35'
-	compile group: 'org.webjars', name: 'jquery', version: '2.1.4'
-	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '1.0.0.RELEASE'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.3.RELEASE'
-	compile('org.springframework.social:spring-social-github:1.0.0.M4')
-	compile('com.atlassian.commonmark:commonmark:0.11.0')
-	compile('com.atlassian.commonmark:commonmark-ext-autolink:0.11.0')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-mustache')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.fasterxml.jackson.module:jackson-module-kotlin')
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
-	compile 'com.h2database:h2:1.4.184'
+	compile('com.h2database:h2:1.4.184')
+
+	// frontend
+	compile('com.atlassian.commonmark:commonmark:0.11.0')
+	compile('com.atlassian.commonmark:commonmark-ext-autolink:0.11.0')
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile('org.springframework.boot:spring-boot-starter-mustache')
+
+	// oAuth2
+	compile('org.webjars:jquery:2.2.1')
+	compile('org.webjars:webjars-locator-core:0.35')
+	compile('org.webjars:js-cookie:2.1.0')
+	compile("org.springframework.social:spring-social-twitter:1.1.0.M2")
+	compile('org.springframework.social:spring-social-github:1.0.0.M4')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.2.BUILD-SNAPSHOT')
+
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test') {
 		exclude module: 'junit'

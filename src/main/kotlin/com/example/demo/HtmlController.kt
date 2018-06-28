@@ -1,5 +1,7 @@
 package com.example.demo
 
+import org.springframework.social.connect.ConnectionRepository
+import org.springframework.social.twitter.api.Twitter
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -9,14 +11,34 @@ import java.lang.IllegalArgumentException
 
 @Controller
 class HtmlController(private val repository: CardRepository,
-                     private val markdownConverter: MarkdownConverter) {
+                     private val markdownConverter: MarkdownConverter,
+                     private val twitter: Twitter,
+                     private val connectionRepository: ConnectionRepository) {
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     fun app(model: Model): String {
+
         // instead of model.addAttribute("title", "Application")
         model["title"] = "Kotlin Stream"
         model["cards"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "app"
+    }*/
+
+    fun app(model: Model): String {
+        if (connectionRepository.findPrimaryConnection(Twitter::class.java) == null) {
+                    return "redirect:/connect/twitter"
+        }
+        // Spring UI Model supplies attributes for rendering views
+        // instead of model.addAttribute("title", "Application")
+        model["title"] = "Kotlin Stream"
+        model["greeting"] = twitter.userOperations().userProfile
+        model["cards"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
+        return "app"
+    }
+
+    @GetMapping("/twitter")
+    fun githubLogin() {
+
     }
 
     @GetMapping("/card/{id}")
