@@ -8,6 +8,10 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import java.lang.IllegalArgumentException
+import org.springframework.social.twitter.api.TwitterProfile
+import org.springframework.social.twitter.api.CursoredList
+import java.util.*
+
 
 @Controller
 class HtmlController(private val repository: CardRepository,
@@ -32,7 +36,8 @@ class HtmlController(private val repository: CardRepository,
         // instead of model.addAttribute("title", "Application")
         model["title"] = "Kotlin Stream"
         model["greeting"] = twitter.userOperations().userProfile
-        model["cards"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
+        val friends = twitter.friendOperations().friends
+        model["cards"] = friends.map{ Card(it.name, it.createdDate.toString(), it.id) }
         return "app"
     }
 
@@ -41,7 +46,7 @@ class HtmlController(private val repository: CardRepository,
 
     }
 
-    @GetMapping("/card/{id}")
+    /*@GetMapping("/card/{id}")
     fun card(@PathVariable id: Long, model: Model): String {
         val card = repository
                 .findById(id)
@@ -50,23 +55,24 @@ class HtmlController(private val repository: CardRepository,
         model["title"] = card.title
         model["card"] = card
         return "card"
-    }
+    }*/
 
-    fun Card.render() = RenderedCard(
+    fun Card.render(title: String, headline: String?="",
+                    id: Long?=0) = RenderedCard(
             title,
             markdownConverter.invoke(headline),
-            markdownConverter.invoke(content),
-            author,
-            id,
-            addedAt.format()
+            //markdownConverter.invoke(content)
+            //author,
+            id
+            //addedAt.format()
     )
 
     data class RenderedCard(
             val title: String,
             val headline: String,
-            val content: String,
-            val author: User,
-            val id: Long?,
-            val addedAt: String
+            //val content: String
+            //val author: User,
+            val id: Long?
+            //val addedAt: String
     )
 }
