@@ -14,10 +14,9 @@ import java.util.*
 
 
 @Controller
-class HtmlController(private val repository: CardRepository,
-                     private val markdownConverter: MarkdownConverter,
+class HtmlController(private val connectionRepository: ConnectionRepository,
                      private val twitter: Twitter,
-                     private val connectionRepository: ConnectionRepository) {
+                     private val markdownConverter: MarkdownConverter) {
 
     /*@GetMapping("/")
     fun app(model: Model): String {
