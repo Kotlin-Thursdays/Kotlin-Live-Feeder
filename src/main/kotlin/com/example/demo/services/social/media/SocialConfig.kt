@@ -18,7 +18,8 @@ import org.springframework.social.connect.ConnectionRepository
 import org.springframework.social.connect.web.ConnectController
 
 @Configuration
-class SocialConfig {
+@EnableSocial
+class SocialConfig: SocialConfigurer {
 
     @Inject
     private val environment: Environment? = null
@@ -32,8 +33,8 @@ class SocialConfig {
                 environment!!.getProperty("github.clientSecret")))
 
         registry.addConnectionFactory(TwitterConnectionFactory(
-                environment!!.getProperty("twitter.consumerKey"),
-                environment!!.getProperty("twitter.consumerSecret")))
+                environment!!.getProperty("twitter.clientId"),
+                environment!!.getProperty("twitter.clientSecret")))
 
         return registry
     }

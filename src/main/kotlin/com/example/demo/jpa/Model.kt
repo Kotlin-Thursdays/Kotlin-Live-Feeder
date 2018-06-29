@@ -19,11 +19,7 @@ data class Card(
         val addedAt: LocalDateTime = LocalDateTime.now()
 )
 
-@Entity
 data class User(
-        @Id val login: String,
-        val firstname: String,
-        val lastname: String,
-        val description: String? = null
+        @Id val login: String
 )
 

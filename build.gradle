@@ -84,6 +84,10 @@ dependencies {
 	compile('org.springframework.social:spring-social-github:1.0.0.M4')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.2.BUILD-SNAPSHOT')
+	compile('org.springframework.security:spring-security-crypto:3.2.3.RELEASE')
+	compile('org.springframework.social:spring-social-core:1.1.1.BUILD-SNAPSHOT')
+	compile('org.springframework.social:spring-social-web:1.1.1.BUILD-SNAPSHOT')
+	compile('javax.inject:javax.inject:')
 
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test') {
