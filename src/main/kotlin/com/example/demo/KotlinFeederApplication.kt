@@ -55,7 +55,7 @@ class KotlinFeederApplication: WebSecurityConfigurerAdapter() {
         return builder.build()
     }
 
-    /*@Bean
+    @Bean
     fun databaseInitializer(userRepository: UserRepository,
                             cardRepository: CardRepository) = CommandLineRunner {
         val smaldini = User("smaldini", "Stéphane", "Maldini")
@@ -75,7 +75,7 @@ class KotlinFeederApplication: WebSecurityConfigurerAdapter() {
                 smaldini,
                 2
         ))
-    }*/
+    }
 }
 
 fun main(args: Array<String>) {

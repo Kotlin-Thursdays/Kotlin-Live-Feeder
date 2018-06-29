@@ -17,9 +17,6 @@ import javax.sql.DataSource
 import org.springframework.social.connect.ConnectionRepository
 import org.springframework.social.connect.web.ConnectController
 
-
-
-
 @Configuration
 class SocialConfig {
 

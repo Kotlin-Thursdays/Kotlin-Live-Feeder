@@ -13,10 +13,10 @@ import javax.persistence.*
 data class Card(
         val title: String,
         val headline: String,
-        //val content: String
-        //@ManyToOne @JoinColumn val author: User,
-        @Id @GeneratedValue val id: Long? = null
-        //val addedAt: LocalDateTime = LocalDateTime.now()
+        val content: String,
+        @ManyToOne @JoinColumn val author: User,
+        @Id @GeneratedValue val id: Long? = null,
+        val addedAt: LocalDateTime = LocalDateTime.now()
 )
 
 @Entity
