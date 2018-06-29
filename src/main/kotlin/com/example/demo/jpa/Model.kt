@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.jpa
 
 import java.time.LocalDateTime
 import javax.persistence.*

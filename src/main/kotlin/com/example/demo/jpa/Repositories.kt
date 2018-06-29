@@ -1,8 +1,8 @@
-package com.example.demo
+package com.example.demo.jpa
 
 import org.springframework.data.repository.CrudRepository
 
-/* ----------Spring Java Persistence API (JPA) Module----------------
+/* ----------Spring Java Persistence API (jpa) Module----------------
  * The central interface in the Spring Data repository abstraction
  * is Repository.  It manages domain classes as well as domain class
  * type arguments. The interface acts primarily as a marker interface

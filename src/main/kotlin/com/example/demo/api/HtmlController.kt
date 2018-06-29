@@ -1,6 +1,10 @@
-package com.example.demo
+package com.example.demo.api
 
-import org.springframework.beans.factory.annotation.Autowired
+import com.example.demo.jpa.Card
+import com.example.demo.jpa.CardRepository
+import com.example.demo.jpa.User
+import com.example.demo.format
+import com.example.demo.services.markdown.converter.MarkdownConverter
 import org.springframework.social.connect.ConnectionRepository
 import org.springframework.social.twitter.api.Twitter
 import org.springframework.stereotype.Controller
@@ -9,9 +13,6 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import java.lang.IllegalArgumentException
-import org.springframework.social.twitter.api.TwitterProfile
-import org.springframework.social.twitter.api.CursoredList
-import java.util.*
 
 /* Spring introduced the @Autowired annotation for dependency injection.
  * Any of the Spring components can be autowired. These include, components,

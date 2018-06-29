@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.services.social.media
 
 import org.springframework.context.annotation.*
 import org.springframework.core.env.Environment

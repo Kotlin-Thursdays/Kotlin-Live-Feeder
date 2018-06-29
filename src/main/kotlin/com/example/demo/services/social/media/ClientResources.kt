@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.services.social.media
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails

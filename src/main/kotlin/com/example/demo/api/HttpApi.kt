@@ -1,5 +1,7 @@
-package com.example.demo
+package com.example.demo.api
 
+import com.example.demo.jpa.CardRepository
+import com.example.demo.services.markdown.converter.MarkdownConverter
 import org.springframework.web.bind.annotation.*
 
 
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/card")
 class CardController(private val repository: CardRepository,
-                        private val markdownConverter: MarkdownConverter) {
+                     private val markdownConverter: MarkdownConverter) {
 
     @GetMapping("/")
     fun findAll() {
