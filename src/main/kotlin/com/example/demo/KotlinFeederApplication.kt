@@ -1,4 +1,4 @@
-package com.example.demo.config
+package com.example.demo
 
 import com.example.demo.jpa.Account
 import com.example.demo.jpa.AccountRepository
@@ -9,7 +9,6 @@ import com.samskivert.mustache.Mustache
 import org.springframework.boot.Banner
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
