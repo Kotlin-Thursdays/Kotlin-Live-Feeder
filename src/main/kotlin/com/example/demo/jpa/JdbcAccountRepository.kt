@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.RowMapper
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Repository
 import java.sql.ResultSet
-import java.sql.SQLException
 import javax.transaction.Transactional
 
 @Repository

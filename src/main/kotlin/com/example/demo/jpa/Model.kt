@@ -19,10 +19,12 @@ data class Card(
         val addedAt: LocalDateTime = LocalDateTime.now()
 )
 
+@Entity
 data class Account(val username: String,
                    val password: String? = null,
                    val firstName: String,
                    val lastName: String)
+
 
 data class RenderedCard(
         val title: String,
