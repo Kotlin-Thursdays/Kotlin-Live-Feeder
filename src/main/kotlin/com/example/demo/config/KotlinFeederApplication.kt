@@ -1,9 +1,10 @@
-package com.example.demo
+package com.example.demo.config
 
+import com.example.demo.jpa.Account
+import com.example.demo.jpa.AccountRepository
 import com.example.demo.jpa.Card
 import com.example.demo.jpa.CardRepository
-import com.example.demo.jpa.User
-import com.example.demo.jpa.UserRepository
+import com.example.demo.signin.SimpleSignInAdapter
 import com.samskivert.mustache.Mustache
 import org.springframework.boot.Banner
 import org.springframework.boot.CommandLineRunner
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
-import org.springframework.stereotype.Controller
+import org.springframework.social.connect.web.SignInAdapter
 
 
 /*
@@ -30,9 +31,8 @@ import org.springframework.stereotype.Controller
  * processor
  */
 
-@Controller
+
 @SpringBootApplication
-@EnableOAuth2Sso
 class KotlinFeederApplication: WebSecurityConfigurerAdapter() {
 
     @Bean
@@ -45,10 +45,14 @@ class KotlinFeederApplication: WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    fun databaseInitializer(userRepository: UserRepository,
+    fun signInAdapter(): SignInAdapter {
+        return SimpleSignInAdapter()
+    }
+
+    @Bean
+    fun databaseInitializer(userRepository: AccountRepository,
                             cardRepository: CardRepository) = CommandLineRunner {
-        val smaldini = User("smaldini", "Stéphane", "Maldini")
-        userRepository.save(smaldini)
+        val smaldini = Account(username = "smaldini", firstName = "guy", lastName = "ferarri")
 
         cardRepository.save(Card(
                 "Reactor Bismuth is out",

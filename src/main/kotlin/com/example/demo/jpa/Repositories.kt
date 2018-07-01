@@ -1,5 +1,6 @@
 package com.example.demo.jpa
 
+import com.example.demo.UserNameAlreadyInUseException
 import org.springframework.data.repository.CrudRepository
 
 /* ----------Spring Java Persistence API (jpa) Module----------------
@@ -36,4 +37,9 @@ interface CardRepository : CrudRepository<Card, Long> {
     fun findAllByOrderByAddedAtDesc(): Iterable<Card>
 }
 
-interface UserRepository : CrudRepository<User, String>
+interface AccountRepository {
+    fun createAccount(account: Account)
+
+    @Throws(UserNameAlreadyInUseException::class)
+    fun findAccountByUsername(username: String): Account
+}

@@ -1,10 +1,12 @@
-package com.example.demo.api
+package com.example.demo.controllers
 
 import com.example.demo.jpa.Card
 import com.example.demo.jpa.CardRepository
-import com.example.demo.jpa.User
 import com.example.demo.format
+import com.example.demo.jpa.AccountRepository
+import com.example.demo.jpa.RenderedCard
 import com.example.demo.services.markdown.converter.MarkdownConverter
+import javax.inject.Provider
 import org.springframework.social.connect.ConnectionRepository
 import org.springframework.social.twitter.api.Twitter
 import org.springframework.stereotype.Controller
@@ -13,6 +15,7 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import java.lang.IllegalArgumentException
+import java.security.Principal
 
 /* Spring introduced the @Autowired annotation for dependency injection.
  * Any of the Spring components can be autowired. These include, components,
@@ -25,8 +28,8 @@ import java.lang.IllegalArgumentException
 @Controller
 class HtmlController(private val repository: CardRepository,
                      private val markdownConverter: MarkdownConverter,
-                     private val connectionRepository: ConnectionRepository,
-                     private val twitter: Twitter) {
+                     private val connectionRepositoryProvider: Provider<ConnectionRepository>,
+                     private val accountRepository: AccountRepository) {
 
     /*@GetMapping("/")
     fun app(model: Model): String {
@@ -38,21 +41,17 @@ class HtmlController(private val repository: CardRepository,
     }*/
 
     @GetMapping("/")
-    fun app(model: Model): String {
-        if (connectionRepository.findPrimaryConnection(Twitter::class.java) == null) {
-                    return "redirect:/connect/twitter"
-        }
+    fun app(currentUser: Principal, model: Model): String {
         // Spring UI Model supplies attributes for rendering views
         // instead of model.addAttribute("title", "Application")
         model["title"] = "Kotlin Stream"
-        model["greeting"] = twitter.userOperations().userProfile
+        model["connectionsToProviders"] = getConnectionRepository().findAllConnections()
         model["cards"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
+        if (currentUser != null) {
+            model["username"] = accountRepository.findAccountByUsername(currentUser.name)
+        }
+
         return "app"
-    }
-
-    @GetMapping("/twitter")
-    fun githubLogin() {
-
     }
 
     @GetMapping("/card/{id}")
@@ -66,7 +65,7 @@ class HtmlController(private val repository: CardRepository,
         return "card"
     }
 
-    private fun Card.render() = RenderedCard(
+    fun Card.render() = RenderedCard(
             title,
             markdownConverter.invoke(headline),
             markdownConverter.invoke(content),
@@ -75,12 +74,7 @@ class HtmlController(private val repository: CardRepository,
             addedAt.format()
     )
 
-    data class RenderedCard(
-            val title: String,
-            val headline: String,
-            val content: String,
-            val author: User,
-            val id: Long?,
-            val addedAt: String
-    )
+    private fun getConnectionRepository(): ConnectionRepository {
+        return connectionRepositoryProvider.get()
+    }
 }
